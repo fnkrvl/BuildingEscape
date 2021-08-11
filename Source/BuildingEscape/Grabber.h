@@ -31,7 +31,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
-	float Reach = 100.f;
+	float Reach = 220.f;
 
 	void Grab();
 	void Release();

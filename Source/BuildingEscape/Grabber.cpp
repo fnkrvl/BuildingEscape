@@ -29,6 +29,8 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
 	// If the physics handle is attach.
+	if (!PhysicsHandle)
+		return;
 	if (PhysicsHandle->GrabbedComponent)
 	{
 		// Move the object we are holding.
@@ -41,16 +43,6 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 FHitResult UGrabber::GetFirstPhysicsBodyInReach() const
 {
-	DrawDebugLine(GetWorld(),
-			GetPlayersWorldPosition(),
-			GetPlayersReach(),
-			FColor(0, 255, 0),
-			false,
-			0.f,
-			0,
-			5.f
-	);
-
 	FHitResult Hit;
 	// Ray-cast out to a certain distance (Reach)
 	FCollisionQueryParams TraceParams(FName(TEXT("")), false, GetOwner());
@@ -69,17 +61,24 @@ void UGrabber::Grab()
 {  	
 	FHitResult HitResult = GetFirstPhysicsBodyInReach();
 	UPrimitiveComponent* ComponentToGrab = HitResult.GetComponent();
-
+	AActor* ActorHit = HitResult.GetActor();
+	
 	// If we hit something then attach the physics handle.
-	if (HitResult.GetActor())
+	if (ActorHit)
 	{
+		if (!PhysicsHandle)
+			return;
 		PhysicsHandle->GrabComponentAtLocation(ComponentToGrab, NAME_None, GetPlayersReach());
 	}
 }
 
 void UGrabber::Release()
 {
-	PhysicsHandle->ReleaseComponent();
+	PhysicsHandle->bRotationConstrained = false;
+	
+	if (!PhysicsHandle)
+		return;
+	PhysicsHandle->ReleaseComponent();	
 }
 
 // Check for Physics Handle Component
@@ -87,7 +86,7 @@ void UGrabber::FindPhysicsHandle()
 {	
 	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
 
-	if (PhysicsHandle == nullptr)
+	if (!PhysicsHandle) 
 	{
 		UE_LOG(LogTemp, Warning, TEXT("No physics handle component found on %s!"), *GetOwner()->GetName());
 	}		
