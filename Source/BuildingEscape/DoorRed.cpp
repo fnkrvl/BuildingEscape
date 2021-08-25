@@ -48,7 +48,7 @@ void UDoorRed::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 	if (TotalMassOfActor() == MassToOpenDoors )
 	{
-		TSubclassOf<AGoldStatue> ClassToFind = AGoldStatue::StaticClass();
+		const TSubclassOf<AGoldStatue> ClassToFind = AGoldStatue::StaticClass();
 		TArray<AActor*> FoundActors;
 		UGameplayStatics::GetAllActorsOfClass(GetWorld(), ClassToFind, FoundActors);
 
