@@ -36,12 +36,13 @@ void UDoorGreen::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// UE_LOG(LogTemp, Warning, TEXT("%s"), *GetOwner()->GetActorRotation().ToString());
-	// UE_LOG(LogTemp, Warning, TEXT("Yaw is: %f"), GetOwner()->GetActorRotation().Yaw);
-
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *GetOwner()->GetActorRotation().ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("Yaw is: %f"), GetOwner()->GetActorRotation().Yaw);
 	
-	if (TotalMassOfActor() > MassToOpenDoors)
+	if (TotalMassOfActor() == MassToOpenDoors)
 	{
+	UE_LOG(LogTemp, Warning, TEXT("Total Mass Puerta verde ==!"))
+		
 		OpenDoor(DeltaTime);
 
 		DoorLastOpened = GetWorld()->GetTimeSeconds();

@@ -3,11 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GoldStatue.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Otolith.generated.h"
 
+class UDoorRed;
 class USpringArmComponent;
 class UCameraComponent;
 class UStaticMeshComponent;
@@ -21,6 +23,8 @@ public:
 	// Sets default values for this character's properties
 	AOtolith();
 
+	TArray<FString> StrArr;
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	USpringArmComponent* SpringArmComp = nullptr;
 	
@@ -28,20 +32,25 @@ public:
 	UCameraComponent* CameraComp = nullptr;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
-	UStaticMeshComponent* MeshComp = nullptr; 
+	UStaticMeshComponent* MeshComp = nullptr;
+
+	
 
 protected:
 	// Move
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
+
+	UPROPERTY(EditAnywhere, Category = Trace)
+	float Distance;
 	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 	
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
+	int NumberOfStatues;
 };

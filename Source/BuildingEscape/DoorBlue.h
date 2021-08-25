@@ -46,7 +46,7 @@ class BUILDINGESCAPE_API UDoorBlue : public UActorComponent
 	float DoorCloseSpeed = 2.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Door)
-	float MassToOpenDoors = 80.f;
+	int32 MassToOpenDoors = 200;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Door)
 	ATriggerVolume* Trigger_Blue = nullptr;

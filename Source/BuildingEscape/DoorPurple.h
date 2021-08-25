@@ -34,7 +34,7 @@ class BUILDINGESCAPE_API UDoorPurple : public UActorComponent
 	bool CloseDoorSound = true;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Door)
-	float OpenAngle = 90.f;
+	float OpenAngle = 150.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Door)
 	float DoorCloseDelay = .5f;
@@ -46,7 +46,7 @@ class BUILDINGESCAPE_API UDoorPurple : public UActorComponent
 	float DoorCloseSpeed = 2.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Door)
-	float MassToOpenDoors = 80.f;
+	float MassToOpenDoors = 110.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Door)
 	ATriggerVolume* Trigger_Purple = nullptr;

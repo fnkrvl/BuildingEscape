@@ -40,7 +40,7 @@ void UDoorOrange::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	// UE_LOG(LogTemp, Warning, TEXT("Yaw is: %f"), GetOwner()->GetActorRotation().Yaw);
 
 	
-	if (TotalMassOfActor() > MassToOpenDoors)
+	if (TotalMassOfActor() == MassToOpenDoors)
 	{
 		OpenDoor(DeltaTime);
 

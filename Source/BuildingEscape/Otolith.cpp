@@ -3,6 +3,7 @@
 
 #include "Otolith.h"
 
+#include "DoorRed.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -19,13 +20,14 @@ AOtolith::AOtolith()
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlayerMesh"));
 	MeshComp->SetupAttachment(RootComponent);
+	MeshComp->SetNotifyRigidBodyCollision(true);
+	MeshComp->SetGenerateOverlapEvents(true);
 }
 
 // Called every frame
-void AOtolith::Tick(float DeltaTime)
+void AOtolith::Tick(float DeltaTime) 
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -34,7 +36,7 @@ void AOtolith::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	// Action
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AOtolith::Jump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AOtolith::Jump);	
 
 	// Move
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &AOtolith::MoveForward);
@@ -43,7 +45,6 @@ void AOtolith::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	// Look
 	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APawn::AddControllerPitchInput);
-	
 }
 
 
@@ -62,5 +63,12 @@ void AOtolith::MoveRight(float AxisValue)
 		AddMovementInput(GetActorRightVector() * AxisValue);
 	}
 }
+
+
+
+
+
+
+
 
 
