@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "GoldStatue.h"
 #include "Otolith.h"
 #include "Components/AudioComponent.h"
@@ -27,14 +26,11 @@ AGoldStatue::AGoldStatue()
 	TriggerCapsule->SetCollisionProfileName(TEXT("Trigger"));
 	TriggerCapsule->SetupAttachment(RootComponent);
 	TriggerCapsule->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
-
 	TriggerCapsule->OnComponentBeginOverlap.AddDynamic(this, &AGoldStatue::OnOverlapBegin);
 
-//	ParticleSystem = CreateDefaultSubobject<UParticleSystem>(TEXT("Particle System"));
-
-	Audio_PickStatue = CreateDefaultSubobject<UAudioComponent>(TEXT("AudioComp"));
-	Audio_PickStatue->bAutoActivate = false;
-	Audio_PickStatue->SetupAttachment(RootComponent);
+	// Audio_PickStatue = CreateDefaultSubobject<UAudioComponent>(TEXT("AudioComp"));
+	// Audio_PickStatue->bAutoActivate = false;
+	// Audio_PickStatue->SetupAttachment(RootComponent);
 
 	RotSpeed = FVector(0.0f, 0.0f, 7.0f);
 	Distance = 35.f;
@@ -46,10 +42,10 @@ void AGoldStatue::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (Audio_Cue->IsValidLowLevel())
-	{
-		Audio_PickStatue->SetSound(Audio_Cue);
-	}
+	// if (Audio_Cue->IsValidLowLevel())
+	// {
+	// 	Audio_PickStatue->SetSound(Audio_Cue);
+	// }
 }
 
 // Called every frame
@@ -75,9 +71,5 @@ void AGoldStatue::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, clas
 {
 	AOtolith* Otolith = Cast<AOtolith>(OtherActor);
 	if (Otolith != nullptr)
-	{
-		Audio_PickStatue->Play();
 		Destroy();
-	}
-	
 }
