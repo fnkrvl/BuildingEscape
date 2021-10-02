@@ -5,18 +5,12 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "BuildingEscape",
+			"Name": "IslandEscape",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine"
 			]
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "Water",
-			"Enabled": true
 		}
 	]
 }
